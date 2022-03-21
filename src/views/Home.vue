@@ -1,18 +1,38 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="form-auth">
+    <div v-if="showLogin">
+      <Login />
+      <p>
+        Belum punya akun?
+        <a href="#" @click="showLogin = false">Buat akun</a>
+      </p>
+    </div>
+
+    <div v-else>
+      <Register />
+      <p>
+        Sudah punya akun?
+        <a href="#" @click="showLogin = true">Login disini</a>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Login from "../components/auth/login.vue";
+import Register from "../components/auth/register.vue";
+import { ref } from "vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Login,
+    Register,
+  },
+  setup() {
+    const showLogin = ref(true);
+
+    return { showLogin };
+  },
+};
 </script>
