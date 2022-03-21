@@ -1,27 +1,49 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <div class="alert alert-danger">Error Message!</div>
 
     <h3 class="h3 mb-3 fw-normal">Register</h3>
     <div class="form-floating">
-      <input type="text" class="form-control" />
+      <input type="text" class="form-control" v-model="name" />
       <label for="">Nama</label>
     </div>
     <div class="form-floating">
-      <input type="email" class="form-control" />
+      <input type="email" class="form-control" v-model="email" />
       <label for="">Email Address</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" />
+      <input type="password" class="form-control" v-model="password" />
       <label for="">Password</label>
     </div>
 
-    <button class="w-100 btn btn-large btn-primary">Register</button>
+    <button type="submit" class="w-100 btn btn-large btn-primary">
+      Register
+    </button>
   </form>
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+import useRegister from "../../composable/useRegister";
+export default {
+  setup() {
+    const name = ref("");
+    const email = ref("");
+    const password = ref("");
+
+    const { error, register } = useRegister();
+
+    const handleSubmit = async () => {
+      await register(email.value, email.value, password.value);
+
+      if (!error.value) {
+        console.log(error.value);
+      }
+    };
+
+    return { name, email, password, handleSubmit };
+  },
+};
 </script>
 
 <style></style>
