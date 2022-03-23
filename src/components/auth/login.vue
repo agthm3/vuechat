@@ -1,6 +1,6 @@
 <template>
   <form>
-    <div class="alert alert-danger">Error Message!</div>
+    <div class="alert alert-danger" v-if="error">{{ error }}</div>
 
     <h3 class="h3 mb-3 fw-normal">Login</h3>
     <div class="form-floating">

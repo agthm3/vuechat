@@ -1,0 +1,29 @@
+import { ref } from "vue";
+import { projectAuth } from "../config/firebase";
+
+const error = ref(nul);
+
+const login = async (email, password) => {
+  error.value = null;
+
+  try {
+    const res = await projectAuth.signInWithEmailAndPassword(email, password);
+    error.value = null;
+
+    console.log(res);
+
+    return res;
+  } catch (err) {
+    console.error(err.value);
+    error.value = "incorrect login credentials";
+  }
+};
+
+const useLogin = () => {
+  return {
+    error,
+    login,
+  };
+};
+
+export default useLogin;
