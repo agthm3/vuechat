@@ -34,7 +34,7 @@ export default {
     const { error, register } = useRegister();
 
     const handleSubmit = async () => {
-      await register(email.value, email.value, password.value);
+      await register(name.value, email.value, password.value);
 
       if (!error.value) {
         context.emit("register");
