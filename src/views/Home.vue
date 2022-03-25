@@ -1,7 +1,7 @@
 <template>
   <div class="form-auth">
     <div v-if="showLogin">
-      <Login />
+      <Login @login="accessRoom" />
       <p>
         Belum punya akun?
         <a href="#" @click="showLogin = false">Buat akun</a>
@@ -9,7 +9,7 @@
     </div>
 
     <div v-else>
-      <Register />
+      <Register @register="accessRoom" />
       <p>
         Sudah punya akun?
         <a href="#" @click="showLogin = true">Login disini</a>
@@ -23,6 +23,7 @@
 import Login from "../components/auth/login.vue";
 import Register from "../components/auth/register.vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 export default {
   name: "Home",
   components: {
@@ -31,8 +32,13 @@ export default {
   },
   setup() {
     const showLogin = ref(true);
+    const router = useRouter();
 
-    return { showLogin };
+    const accessRoom = () => {
+      router.push({ name: "Room" });
+    };
+
+    return { showLogin, accessRoom };
   },
 };
 </script>
