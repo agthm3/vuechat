@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { projectFirestore } from "../config/firebase";
 
-const useCollection = (collectin) => {
+const useCollection = (collection) => {
   const error = ref(null);
 
   const storeDoc = async (document) => {
@@ -10,7 +10,7 @@ const useCollection = (collectin) => {
       await projectFirestore.collection(collection).add(document);
     } catch (err) {
       console.error(err.message);
-      error.value = "Could not send the message";
+      error.value = "could not send the message";
     }
   };
 
