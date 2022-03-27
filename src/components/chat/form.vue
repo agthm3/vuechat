@@ -1,6 +1,6 @@
 <template>
+  <div class="alert alert-danger" v-if="error">{{ error }}</div>
   <form class="d-flex chat-form">
-    <div class="alert alert-danger">{{ error }}</div>
     <input
       type="text"
       placeholder="Tulis pesan anda..."
@@ -22,16 +22,20 @@
 <script>
 import { ref } from "vue";
 import useCollection from "../../composable/useCollection";
+import getUser from "../../composable/getUser";
 import { timestamp } from "../../config/firebase";
 
 export default {
   setup() {
     const message = ref("");
     const { error, storeDoc } = useCollection("message");
+    const { user } = getUser();
 
     const handleSubmit = async () => {
       const chat = {
-        name: "Halil",
+        name: user.value.displayName,
+        //displayName adalah objek/properti firebase untuk mendapatkan
+        //data user yang telah otentikasi
         message: message.value,
         createdAt: timestamp(),
       };

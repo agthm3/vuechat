@@ -33,16 +33,12 @@
 
 <script>
 import useLogout from "../composable/useLogout";
-import { projectAuth } from "../config/firebase";
-import { ref } from "vue";
+import getUser from "../composable/getUser";
 export default {
   setup() {
     const { error, logout } = useLogout();
-    const user = ref(projectAuth.currentUser);
 
-    projectAuth.onAuthStateChanged((_user) => {
-      user.value = _user;
-    });
+    const { user } = getUser();
 
     const handleLogout = async () => {
       await logout();
@@ -52,7 +48,7 @@ export default {
       }
     };
 
-    return { handleLogout, projectAuth, user };
+    return { handleLogout, user };
   },
 };
 </script>
