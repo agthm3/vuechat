@@ -5,7 +5,16 @@ import * as firebase from "firebase/app";
 
 import "./assets/app.css";
 
-createApp(App).use(router).mount("#app");
+import { projectAuth } from "./config/firebase";
+
+let app;
+
+projectAuth.onAuthStateChanged(() => {
+  if (!app) {
+    app = createApp(App).use(router).mount("#app");
+  }
+});
+
 firebase.initializeApp({
   apiKey: "AIzaSyBy1rmTwdjq0eUYxp7OWbcARryEms1oC1E",
   authDomain: "vuechat-253d1.firebaseapp.com",

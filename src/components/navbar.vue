@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Vuechat</a>
+      <a class="navbar-brand" href="#">Chat Grup v1.0</a>
       <button
         class="navbar-toggler"
         type="button"
